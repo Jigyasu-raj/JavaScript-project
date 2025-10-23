@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Joke Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: arial;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: darkorange;
+        }
+
+        .container {
+            width: 25rem;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: black;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0px 0px 3px gray;
+        }
+
+        .imogi {
+            font-size: 5rem;
+            padding: 0rem 0.25rem;
+        }
+
+        #display {
+            color: white;
+            height: 4rem;
+            padding: 0.5rem;
+            text-align: center;
+        }
+
+        button {
+            width: 50%;
+            height: 2.5rem;
+            border: none;
+            outline: none;
+            background-color: darkorange;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="imogi">
+            😂
+        </div>
+        <p id="display">
+
+        </p>
+        <button>Generate</button>
+    </div>
+    <script>
+        const Button = document.querySelector("button")
+        const Display = document.querySelector("#display")
+        const url = "https://official-joke-api.appspot.com/random_joke"
+        Button.addEventListener("click", function () {
+            fetch(url)
+                .then(res => res.json())
+                // find response from api
+                .then(data => {
+                    Display.innerHTML = `${data.setup}<br>${data.punchline}`
+                })
+                .catch(error => {
+                    alert("Error with jokeapi")
+                })
+
+
+        })
+    </script>
+</body>
+
+</html>

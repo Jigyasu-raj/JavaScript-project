@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Validatiion</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+          html,body{
+            width:100%;
+            height:100%;
+            background-color: blueviolet;
+             display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          }
+          .container
+          {
+           width:30%;
+           height:auto;
+           padding:1rem;
+           background-color: white;
+           border-radius: 10px;
+          }
+          .container input{
+            width:100%;
+            height:30px;
+            padding:10px; 
+            outline: 0;
+          }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+    <label for="name">Phone Number:-</label><br>
+    <input type="number" id="number" placeholder="Enter your number" onkeyup="numberValidaton()">
+    <span id="number-error"></span>
+    </div>
+    <script>
+        let numberError = document.querySelector("#number-error")
+        function numberValidaton()
+        {
+          let number = document.querySelector("#number").value.trim();
+          if(number.length === 0)
+          {
+            numberError.innerHTML = "Number is required"
+             numberError.style.color = "red"
+             return false
+          }
+        if(number.length!==10)
+        {
+            numberError.innerHTML = "Number should be 10 digits"
+            numberError.style.color = "red"
+             return false
+        }
+          
+         
+        
+        numberError.innerHTML = "Correct Name"
+        numberError.style.color = "green"
+
+
+        setTimeout(()=>
+        {
+            numberError.innerHTML =""
+        },2000)
+        }
+       
+       
+       
+        
+        
+    </script>
+</body>
+</html>

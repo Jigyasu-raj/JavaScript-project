@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PopUp Message</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pop-up-container {
+            width: 300px;
+            height: auto;
+            background-color: #e4dbdb;
+            padding: 1rem;
+            display: flex;
+            position: absolute;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 10px;
+            transform: scale(0);
+            transition: transform 0.5s;
+        }
+
+        .pop-up-container .popUp-icon {
+            font-size: 5rem;
+            ;
+            color: green;
+            margin: -3rem;
+        }
+
+        .pop-up-container .popUp-text {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .pop-up-container .popUp-button {
+            width: 100%;
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        .pop-up-container .popUp-button>button {
+            width: 100%;
+            height: 35px;
+            border: 0;
+            outline: 0;
+            background-color: green;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        button {
+            width: 10%;
+            height: 35px;
+            border: 0;
+            outline: 0;
+            background-color: crimson;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            margin: auto;
+        }
+
+        .openPopUp {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="pop-up-container">
+        <div class="popUp-icon">
+            <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="popUp-text">
+            <h2>Thank You!</h2>
+            <p>Your form successfully submitted thankyou!</p>
+        </div>
+        <div class="popUp-button">
+            <button>ok</button>
+        </div>
+    </div>
+    <button onclick="openPopUp()">submit</button>
+    <script>
+
+        function openPopUp() {
+            const popUpContainer = document.querySelector(".pop-up-container")
+            popUpContainer.classList.add("openPopUp")
+            const popClose = document.querySelector(".popUp-button")
+            popClose.addEventListener("click", function () {
+                popUpContainer.classList.remove("openPopUp")              
+            })
+            setTimeout(function(){
+                     popUpContainer.classList.remove("openPopUp")
+                },4000)
+
+        }
+    </script>
+</body>
+
+</html>

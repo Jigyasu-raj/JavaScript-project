@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randam Color Grnerator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: arial;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            width: 200px;
+            height:auto;
+            background-color: tomato;
+            color: white;
+            border: none;
+            border-radius:25px;
+            cursor: pointer;
+            display: block;
+            padding:15px;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>Randam Color Generator</h1>
+        Name: <span></span>
+           <br> <br>
+        <button>Generate Color</button>
+    </center>
+
+    <script>
+        const btn = document.querySelector("button")
+        btn.addEventListener("click", () => {
+            let Generator = ColorGenerator()
+            console.log(Generator)
+            const body = document.querySelector("body")
+            body.style.backgroundColor = Generator
+            const Name = document.querySelector("span")
+            Name.innerText = Generator
+
+        })
+
+        function ColorGenerator() {
+            let red = Math.floor(Math.random() * 255)
+            let green = Math.floor(Math.random() * 255)
+            let blue = Math.floor(Math.random() * 255)
+            let color = `rgb(${red},${green},${blue})`
+            return color
+        }
+    </script>
+</body>
+
+</html>

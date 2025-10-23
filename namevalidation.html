@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Validatiion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+          html,body{
+            width:100%;
+            height:100%;
+            background-color: blueviolet;
+             display:flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          }
+          .container
+          {
+           width:30%;
+           height:auto;
+           padding:1rem;
+           background-color:white;
+           border-radius: 10px;
+          }
+          .input-group{
+            display:flex;
+            justify-content: space-between;
+            align-items: center;
+            width:100%;
+            border-bottom:2px solid black;
+          }
+          #name-error{
+            font-size:1.25rem;
+            width:20%;
+            text-align: right;
+          }
+         input{
+            width:80%;
+            height:30px;
+            padding:10px; 
+            outline:none;
+            border:0;
+            background-color:white;
+          }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+      <div class="input-group">
+    <input type="text" id="name" placeholder="Enter your name" onkeyup="nameValidaton()">
+    <span id="name-error"></span>
+    </div>
+    </div>
+    <script>
+        let nameError = document.querySelector("#name-error")
+        function nameValidaton()
+        {
+          let name = document.querySelector("#name").value;
+          if(name.length == 0)
+          {
+            nameError.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`
+             nameError.style.color = "red"
+             return false
+          }
+          
+          if (!name.match(/^[A-Za-z ]+$/))
+          {
+            nameError.innerHTML = `<i class="fa-solid fa-circle-xmark"></i>`
+            nameError.style.color = "red"
+            return false
+          }
+        
+        nameError.innerHTML = `<i class="fa-solid fa-circle-check"></i>`
+        nameError.style.color = "green"
+
+
+           setTimeout(()=>
+        {
+            nameError.innerHTML =""
+        },5000)
+        }
+       
+       
+       
+        
+        
+    </script>
+</body>
+</html>

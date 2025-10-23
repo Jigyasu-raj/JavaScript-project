@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name Validatiion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background-color: blueviolet;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 30%;
+            height: auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .container input {
+            width: 100%;
+            height: 30px;
+            padding: 10px;
+            outline: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <label for="name">Email:-</label><br>
+        <input type="email" id="email" placeholder="Enter your email" onkeyup="emailValidaton()">
+        <span id="email-error"></span>
+    </div>
+    <script>
+        let inputBox = document.querySelector("input")
+        let emailError = document.querySelector("#email-error")
+        function emailValidaton() {
+            let email = document.querySelector("#email").value;
+            if (email.length === 0) {
+                emailError.innerHTML = "Email is required"
+                emailError.style.color = "red"
+                inputBox.style.borderColor = "red"
+                return false
+            }
+            if (!email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                emailError.innerHTML = "Invalid Email"
+                emailError.style.color = "red"
+                inputBox.style.borderColor = "red"
+                return false
+            }
+
+
+
+            emailError.innerHTML = "Valid  Email"
+            emailError.style.color = "green"
+            inputBox.style.borderColor = "green"
+
+
+            setTimeout(() => {
+                emailError.innerHTML = ""
+            }, 2000)
+        }  
+    </script>
+</body>
+
+</html>
