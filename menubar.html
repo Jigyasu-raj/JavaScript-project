@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animated Menu Bar</title>
+  <style>
+    /* 💫 Background */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #89f7fe, #66a6ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* 🔹 Navbar container */
+    .navbar {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(15px);
+      border-radius: 40px;
+      display: flex;
+      padding: 15px 30px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 🔸 Menu items */
+    .navbar a {
+      position: relative;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      margin: 0 20px;
+      padding: 10px 5px;
+      transition: color 0.3s ease;
+    }
+
+    /* 🔹 Hover underline animation */
+    .navbar a::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #ff7a7a, #ffd36b);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .navbar a:hover {
+      color: #fff;
+    }
+
+    .navbar a:hover::after {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Projects</a>
+    <a href="#">Services</a>
+    <a href="#">Contact</a>
+  </div>
+
+</body>
+</html>

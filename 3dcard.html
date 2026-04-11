@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Card Tilt Effect</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    font-family: "Poppins", sans-serif;
+    perspective: 1000px;
+  }
+
+  .card {
+    width: 300px;
+    height: 400px;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transform-style: preserve-3d;
+  }
+
+  .card img {
+    width: 120px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  }
+
+  .card h2 {
+    margin-top: 20px;
+    font-size: 1.5rem;
+  }
+
+  .card p {
+    width: 80%;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #eee;
+  }
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <img src="https://i.ibb.co/YZX2FQx/avatar.png" alt="Avatar">
+  <h2>3D Magic Card</h2>
+  <p>Move your mouse around to tilt this card in 3D space. It’s pure CSS + JavaScript magic!</p>
+</div>
+
+<script>
+  const card = document.getElementById("card");
+
+  card.addEventListener("mousemove", (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / 20).toFixed(2);
+    const rotateY = ((centerX - x) / 20).toFixed(2);
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+  });
+
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = `rotateX(0deg) rotateY(0deg) scale(1)`;
+  });
+</script>
+
+</body>
+</html>

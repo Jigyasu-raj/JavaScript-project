@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar + Navbar</title>
+  <style>
+    /* Basic setup */
+body,html {
+   height: 100%;
+   width: 100%;
+   margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #89f7fe, #66a6ff);
+  background-attachment: fixed; /* makes it stay full screen */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #333;
+  color: white;
+  padding:10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  margin: 0;
+  font-size: 22px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 16px;
+}
+
+.nav-links a:hover {
+  color: #66a6ff;
+}
+
+/* Menu button for sidebar toggle */
+.menu-btn {
+  background: none;
+  color: white;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 50px; /* below navbar */
+  left: -220px;
+  width: 200px;
+  height: calc(100% - 50px);
+  background: #222;
+  color: white;
+  padding-top: 20px;
+  transition: 0.3s;
+  z-index: 999;
+}
+
+.sidebar a {
+  display: block;
+  padding: 12px 20px;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  background: #66a6ff;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+/* Main content */
+.content {
+  margin-top: 70px;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.content.shifted {
+  margin-left: 200px;
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <button id="menuBtn" class="menu-btn">☰</button>
+    <h1 class="logo">My Website</h1>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <a href="#">🏠 Dashboard</a>
+    <a href="#">📁 Projects</a>
+    <a href="#">📊 Reports</a>
+    <a href="#">⚙️ Settings</a>
+    <a href="#">🚪 Logout</a>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+    <h2>Welcome 👋</h2>
+    <p>This layout has a navbar on top and a sidebar on the left — both managed with JavaScript.</p>
+  </main>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+const sidebar = document.getElementById("sidebar");
+const content = document.querySelector(".content");
+
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("active");
+  content.classList.toggle("shifted");
+});
+
+  </script>
+</body>
+</html>

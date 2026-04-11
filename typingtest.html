@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Test</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ffb300, #ffd54f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      padding: 30px;
+      border-radius: 20px;
+      width: 400px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    #quote {
+      font-size: 18px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      border-radius: 10px;
+      border: none;
+      padding: 10px;
+      font-size: 16px;
+      resize: none;
+      outline: none;
+    }
+
+    button {
+      background: #ff9800;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background: #f57c00;
+    }
+
+    #result {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>⌨️ Typing Speed Test</h2>
+    <p id="quote"></p>
+    <textarea id="typedText" placeholder="Start typing here..."></textarea>
+    <button id="startBtn">Start Test</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+const quotes = [
+  "Hey there! It's a beautiful day to learn something new, right?",
+  "I can’t believe it’s already 10:30 AM and I haven’t even had my coffee yet!",
+  "Coding at midnight feels cool until you realize you’ve been debugging the same line for 2 hours ",
+  "Sometimes all you need is good music, a calm mind, and a working Wi-Fi connection!",
+  "Don’t worry if your code doesn’t work; even professionals Google errors every day.",
+  "Life feels better when you add a little bit of humor and a lot of JavaScript!",
+  "OMG! I just fixed that bug after 3 hours — someone give me a medal ",
+  "Your typing speed is not about rushing, it’s about staying calm and focused.",
+  "Pressing Ctrl + S every few seconds is my way of saying ‘I trust nothing!’ ",
+  "Every great developer was once a beginner who refused to quit — that’s you!"
+];
+
+
+
+    const quoteEl = document.querySelector("#quote");
+    const typedText = document.querySelector("#typedText");
+    const startBtn = document.querySelector("#startBtn");
+    const resultEl = document.querySelector("#result");
+
+    let startTime, endTime, currentQuote;
+
+    startBtn.addEventListener("click", () => {
+     let Index = Math.floor(Math.random() * quotes.length);
+      currentQuote = quotes[Index]
+      quoteEl.textContent = currentQuote;
+      typedText.value = "";
+      resultEl.textContent = "";
+      typedText.disabled = false;
+      typedText.focus();
+      startTime = new Date().getTime();
+    });
+
+    typedText.addEventListener("input", () => {
+      const typedValue = typedText.value;
+      const quote = currentQuote;
+
+  let coloredQuote = "";
+  for (let i = 0; i < quote.length; i++) {
+    if (i < typedValue.length) {
+      if (typedValue[i] === quote[i]) {
+        coloredQuote += `<span style="color: green;">${quote[i]}</span>`;
+      } else {
+        coloredQuote += `<span style="color: red;">${quote[i]}</span>`;
+      }
+    } else {
+      coloredQuote += quote[i];
+    }
+  }
+
+  quoteEl.innerHTML = coloredQuote;
+
+      if (typedValue.trim() === currentQuote.trim()) {
+        endTime = new Date().getTime();
+        const timeTaken = (endTime - startTime) / 1000;
+        const words = currentQuote.split(" ").length;
+        const wpm = Math.round((words / timeTaken) * 60);
+
+        resultEl.innerHTML = `✅ <b>${wpm} WPM</b> (in ${timeTaken.toFixed(1)} sec)`;
+        typedText.disabled = true;
+      }
+    });
+  </script>
+</body>
+</html>

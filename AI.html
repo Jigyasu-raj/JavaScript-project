@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Portfolio Designs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #181818;
+            background: #efe6d8;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .main-nav {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 24px;
+            background: rgba(255, 248, 239, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .main-nav h1 {
+            font-size: 1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .main-nav .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 0.92rem;
+        }
+
+        .design-section {
+            min-height: 100vh;
+            padding: 56px 20px;
+        }
+
+        .wrapper {
+            width: min(1150px, 100%);
+            margin: 0 auto;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .design-one {
+            background:
+                radial-gradient(circle at top left, rgba(223, 137, 74, 0.35), transparent 28%),
+                linear-gradient(135deg, #f6ecdf, #e8ddcf);
+        }
+
+        .design-one .panel {
+            background: rgba(255, 250, 244, 0.72);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(86, 57, 34, 0.15);
+            overflow: hidden;
+        }
+
+        .design-one-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            padding: 24px 28px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .design-one-header strong {
+            display: block;
+            font-size: 1.15rem;
+            font-family: Georgia, serif;
+        }
+
+        .design-one-header span {
+            color: #6f665d;
+            font-size: 0.9rem;
+        }
+
+        .design-one-hero {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 28px;
+            padding: 32px 28px;
+        }
+
+        .design-one-copy h2 {
+            margin-top: 18px;
+            font-family: Georgia, serif;
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            line-height: 0.95;
+        }
+
+        .design-one-copy p {
+            margin-top: 18px;
+            color: #635c55;
+            line-height: 1.85;
+            max-width: 620px;
+        }
+
+        .button-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 140px;
+            padding: 14px 20px;
+            border-radius: 999px;
+            font-weight: 700;
+            transition: transform 0.25s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #c65d2e, #ea9d56);
+            color: #fff;
+        }
+
+        .btn-light {
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .metric-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 26px;
+        }
+
+        .metric {
+            flex: 1 1 140px;
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(0, 0, 0, 0.07);
+        }
+
+        .metric strong {
+            display: block;
+            font-size: 1.5rem;
+        }
+
+        .metric span {
+            display: block;
+            margin-top: 6px;
+            color: #6a625a;
+            font-size: 0.92rem;
+        }
+
+        .design-one-visual {
+            display: grid;
+            gap: 16px;
+        }
+
+        .portrait-box,
+        .note-box,
+        .card-box,
+        .dark-card,
+        .project-tile {
+            border-radius: 24px;
+        }
+
+        .portrait-box {
+            min-height: 280px;
+            padding: 28px;
+            display: flex;
+            align-items: end;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12)),
+                linear-gradient(145deg, #f8e1c6, #d56c36);
+            color: #fff;
+        }
+
+        .portrait-box h3 {
+            font-size: 2rem;
+            font-family: Georgia, serif;
+        }
+
+        .portrait-box p {
+            margin-top: 10px;
+            line-height: 1.7;
+            max-width: 280px;
+        }
+
+        .note-box {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(0, 0, 0, 0.07);
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            padding: 0 28px 32px;
+        }
+
+        .card-box {
+            padding: 22px;
+            background: rgba(255, 255, 255, 0.64);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .card-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .card-box p,
+        .card-box li {
+            color: #645d56;
+            line-height: 1.8;
+        }
+
+        .card-box ul {
+            list-style: none;
+        }
+        .design-two {
+            background:
+                radial-gradient(circle at top right, rgba(0, 224, 199, 0.16), transparent 24%),
+                radial-gradient(circle at bottom left, rgba(70, 92, 255, 0.18), transparent 28%),
+                linear-gradient(140deg, #0c1020, #11162a 60%, #0f1a1d);
+            color: #f4f7ff;
+        }
+
+        .design-two .label {
+            background: rgba(0, 224, 199, 0.14);
+            color: #8ef3e1;
+        }
+
+        .design-two-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 24px;
+        }
+        .dark-card {
+            background: rgba(15, 21, 39, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 26px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+        }
+        .design-two h2 {
+            margin-top: 18px;
+            font-size: clamp(2.6rem, 5vw, 4.8rem);
+            line-height: 0.98;
+        }
+        .design-two p {
+            margin-top: 16px;
+            color: #a7b2cf;
+            line-height: 1.85;
+        }
+
+        .profile-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .chip {
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #dce4ff;
+            font-size: 0.9rem;
+        }
+
+        .stat-grid,
+        .project-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .stat-grid {
+            grid-template-columns: repeat(3, 1fr);
+            margin-top: 24px;
+        }
+
+        .stat-box {
+            padding: 18px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .stat-box strong {
+            display: block;
+            font-size: 1.4rem;
+        }
+
+        .stat-box span {
+            display: block;
+            margin-top: 6px;
+            color: #92a0c1;
+            font-size: 0.88rem;
+        }
+
+        .project-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .project-tile {
+            padding: 20px;
+            background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.25s ease, border-color 0.25s ease;
+        }
+
+        .project-tile:hover {
+            transform: translateY(-5px);
+            border-color: rgba(142, 243, 225, 0.5);
+        }
+
+        .project-tile span {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #8ef3e1;
+            background: rgba(0, 224, 199, 0.1);
+        }
+
+        .project-tile h4 {
+            margin-top: 14px;
+            font-size: 1.15rem;
+        }
+
+        .project-tile p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+        }
+
+        .project-tile a {
+            display: inline-flex;
+            margin-top: 16px;
+            color: #8ef3e1;
+            font-weight: 700;
+        }
+
+        .contact-list {
+            margin-top: 18px;
+            list-style: none;
+        }
+
+        .contact-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #b1bcda;
+        }
+
+        .section-title {
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 900px) {
+            .design-one-hero,
+            .design-two-grid,
+            .two-col,
+            .project-grid,
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .main-nav {
+                padding: 14px 16px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .design-section {
+                padding: 40px 14px;
+            }
+
+            .design-one-header,
+            .design-one-hero,
+            .two-col,
+            .dark-card {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .design-one-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="main-nav">
+        <h1>Portfolio Concepts</h1>
+        <div class="links">
+            <a href="#design1">Design 1</a>
+            <a href="#design2">Design 2</a>
+        </div>
+    </nav>
+
+    <section class="design-section design-one" id="design1">
+        <div class="wrapper">
+            <div class="panel">
+                <div class="design-one-header">
+                    <div>
+                        <strong>Sandeep Verma</strong>
+                        <span>Frontend developer portfolio concept</span>
+                    </div>
+                    <div class="label" style="background:#f8dfc8;color:#9a451b;">Warm Editorial Style</div>
+                </div>
+
+                <div class="design-one-hero">
+                    <div class="design-one-copy">
+                        <div class="label" style="background:rgba(198,93,46,0.12);color:#a14b20;">Design One</div>
+                        <h2>Elegant, personal, and crafted for a creative first impression.</h2>
+                        <p>
+                            This version presents your portfolio in a soft editorial style with warm tones, large
+                            typography, and a clean storytelling layout. It feels friendly, polished, and ideal for
+                            showcasing your journey as a frontend developer.
+                        </p>
+                        <div class="button-row">
+                            <a class="btn btn-primary" href="calculator.html">See Projects</a>
+                            <a class="btn btn-light" href="#design2">View Design 2</a>
+                        </div>
+                        <div class="metric-row">
+                            <div class="metric">
+                                <strong>50+</strong>
+                                <span>HTML practice projects</span>
+                            </div>
+                            <div class="metric">
+                                <strong>UI</strong>
+                                <span>Animations and interactions</span>
+                            </div>
+                            <div class="metric">
+                                <strong>Goal</strong>
+                                <span>Modern frontend growth</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="design-one-visual">
+                        <div class="portrait-box">
+                            <div>
+                                <h3>Creative Frontend Builder</h3>
+                                <p>Responsive layouts, mini apps, and playful browser experiences.</p>
+                            </div>
+                        </div>
+                        <div class="note-box">
+                            <strong>Best for:</strong>
+                            <p>Personal branding, freelancer intros, and simple portfolio websites with a premium feel.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-col">
+                    <div class="card-box">
+                        <h4>About This Style</h4>
+                        <p>
+                            This design uses soft backgrounds, rounded cards, and spacious content blocks. It works
+                            well if you want your portfolio to feel approachable and stylish while still highlighting
+                            your technical work.
+                        </p>
+                    </div>
+                    <div class="card-box">
+                        <h4>Featured Work</h4>
+                        <ul>
+                            <li>Calculator</li>
+                            <li>Hindi Joke Generator</li>
+                            <li>Image Gallery</li>
+                            <li>Typing Test</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="design-section design-two" id="design2">
+        <div class="wrapper">
+            <div class="design-two-grid">
+                <div class="dark-card">
+                    <div class="label">Design Two</div>
+                    <h2>Bold, dark, and more like a modern developer landing page.</h2>
+                    <p>
+                        This version uses a darker interface, glowing accents, and dashboard-style content blocks.
+                        It is better if you want a sharper tech-focused look with strong contrast and a more modern
+                        startup-inspired feel.
+                    </p>
+                    <div class="profile-chip-row">
+                        <div class="chip">HTML</div>
+                        <div class="chip">CSS</div>
+                        <div class="chip">JavaScript</div>
+                        <div class="chip">Responsive UI</div>
+                    </div>
+                    <div class="stat-grid">
+                        <div class="stat-box">
+                            <strong>01</strong>
+                            <span>Single page concept</span>
+                        </div>
+                        <div class="stat-box">
+                            <strong>02</strong>
+                            <span>Different portfolio styles</span>
+                        </div>
+                        <div class="stat-box">
+                            <strong>100%</strong>
+                            <span>Editable in one file</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dark-card">
+                    <h3 class="section-title">Project Highlights</h3>
+                    <div class="project-grid">
+                        <article class="project-tile">
+                            <span>UI Tool</span>
+                            <h4>Calculator</h4>
+                            <p>Functional interface showing button layout, logic, and user interaction.</p>
+                            <a href="calculator.html">Open</a>
+                        </article>
+                        <article class="project-tile">
+                            <span>Fun App</span>
+                            <h4>Hindi Joke Generator</h4>
+                            <p>Randomized text output project using JavaScript and a simple content-focused layout.</p>
+                            <a href="hindijokegenerator.html">Open</a>
+                        </article>
+                        <article class="project-tile">
+                            <span>Gallery</span>
+                            <h4>Image Gallery</h4>
+                            <p>Visual arrangement and presentation work for improving layout confidence.</p>
+                            <a href="imagegallery.html">Open</a>
+                        </article>
+                        <article class="project-tile">
+                            <span>Animation</span>
+                            <h4>Solar System</h4>
+                            <p>A more creative concept showing motion, layering, and browser animation practice.</p>
+                            <a href="solarsystem.html">Open</a>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <div style="height:24px"></div>
+
+            <div class="design-two-grid">
+                <div class="dark-card">
+                    <h3 class="section-title">Why This Style Works</h3>
+                    <p>
+                        The darker theme gives a stronger developer identity. It feels faster, more digital, and more
+                        suited for showcasing technical projects, portfolios, and interactive front-end work.
+                    </p>
+                </div>
+
+                <div class="dark-card">
+                    <h3 class="section-title">Contact Block</h3>
+                    <ul class="contact-list">
+                        <li>Email: yourname@example.com</li>
+                        <li>GitHub: github.com/yourusername</li>
+                        <li>LinkedIn: linkedin.com/in/yourusername</li>
+                        <li>Location: India</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

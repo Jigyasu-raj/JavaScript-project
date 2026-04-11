@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced ::before & ::after Magic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            padding: 40px;
+            color: #333;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        section {
+            margin: 40px 0;
+        }
+
+        /* 1️⃣ Overlay Effect */
+        .overlay-card {
+            position: relative;
+            width: 250px;
+            margin: auto;
+            padding: 40px;
+            background: url('https://picsum.photos/300/200') no-repeat center/cover;
+            color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .overlay-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .overlay-card h3 {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 2️⃣ Animated Underline */
+        .underline {
+            position: relative;
+            display: inline-block;
+            color: #007BFF;
+        }
+
+        .underline::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 3px;
+            background: #007BFF;
+            left: 0;
+            bottom: -5px;
+            transition: 0.3s;
+        }
+
+        .underline:hover::after {
+            width: 100%;
+        }
+
+        /* 3️⃣ Tooltip */
+        .tooltip {
+            position: relative;
+            cursor: pointer;
+            color: crimson;
+            font-weight: bold;
+        }
+
+        .tooltip::after {
+            content: attr(data-tip);
+            position: absolute;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: black;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            opacity: 0;
+            transition: 0.3s;
+            white-space: nowrap;
+        }
+
+        .tooltip::before {
+            content: "";
+            position: absolute;
+            bottom: 115%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: black;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .tooltip:hover::after,
+        .tooltip:hover::before {
+            opacity: 1;
+        }
+
+        /* 4️⃣ Ribbon Badge */
+        .ribbon {
+            position: relative;
+            display: inline-block;
+            padding: 10px 25px;
+            background: crimson;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .ribbon::before,
+        .ribbon::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            border: 10px solid transparent;
+        }
+
+        .ribbon::before {
+            left: 0;
+            border-top-color: darkred;
+        }
+
+        .ribbon::after {
+            right: 0;
+            border-top-color: darkred;
+        }
+
+        /* 5️⃣ Custom Checkbox */
+        .checkbox-container {
+            display: inline-block;
+            position: relative;
+            padding-left: 30px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .checkbox-container input {
+            display: none;
+        }
+
+        .checkbox-container::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #007BFF;
+            border-radius: 4px;
+        }
+
+        .checkbox-container input:checked + span::after {
+            content: "✔";
+            position: absolute;
+            left: 3px;
+            top: -2px;
+            color: #007BFF;
+            font-size: 18px;
+        }
+
+        /* 6️⃣ Numbered Card */
+        .card {
+            position: relative;
+            display: inline-block;
+            padding: 20px;
+            width: 200px;
+            background: white;
+            border-radius: 10px;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .card::before {
+            content: "1";
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background: #007BFF;
+            color: white;
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 50%;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>✨ Advanced ::before & ::after Magic ✨</h1>
+
+    <section>
+        <div class="overlay-card">
+            <h3>Overlay Effect</h3>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="underline">Hover Underline Effect</h2>
+    </section>
+
+    <section>
+        <p>
+            Hover on
+            <span class="tooltip" data-tip="This is a tooltip!">this text</span>
+        </p>
+    </section>
+
+    <section>
+        <div class="ribbon">Special Offer</div>
+    </section>
+
+    <section>
+        <label class="checkbox-container">
+            <input type="checkbox">
+            <span>Custom Checkbox</span>
+        </label>
+    </section>
+
+    <section>
+        <div class="card">Card One</div>
+    </section>
+
+</body>
+</html>

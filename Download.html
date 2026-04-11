@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Download with Internet Check</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body{
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .card{
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    width: 300px;
+  }
+
+  button{
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    background: #25c5df;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  button:disabled{
+    background: gray;
+    cursor: not-allowed;
+  }
+
+  .status{
+    margin-top: 15px;
+    font-size: 14px;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h3>Download File</h3>
+  <button id="downloadBtn">📥 Download</button>
+  <div class="status" id="status">Checking connection...</div>
+</div>
+
+<script>
+const statusText = document.getElementById("status");
+const downloadBtn = document.getElementById("downloadBtn");
+
+// update online/offline status
+function updateStatus(){
+  if(navigator.onLine){
+    statusText.textContent = "🟢 Internet Connected";
+    downloadBtn.disabled = false;
+  }else{
+    statusText.textContent = "🔴 No Internet Connection";
+    downloadBtn.disabled = true;
+  }
+}
+
+window.addEventListener("load", updateStatus);
+window.addEventListener("online", updateStatus);
+window.addEventListener("offline", updateStatus);
+
+// download with real internet check
+downloadBtn.addEventListener("click", async () => {
+  try{
+    statusText.textContent = "⏳ Checking internet...";
+
+    // REAL internet ping (recommended)
+    await fetch("/ping.json", { cache: "no-store" });
+
+    statusText.textContent = "⬇️ Download started...";
+
+    const a = document.createElement("a");
+    a.href = "files/notes.pdf";   // 🔁 change file path
+    a.download = "notes.pdf";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    statusText.textContent = "✅ Download started successfully";
+
+  }catch{
+    statusText.textContent = "❌ Internet not available";
+  }
+});
+
+
+</script>
+
+</body>
+</html>

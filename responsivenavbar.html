@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar + Sidebar</title>
+    <style>
+        /* Page setup */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial,sans-serif;
+            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+        }
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+        }
+
+        /* Navbar base */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #333;
+            color: white;
+            padding:8px 20px;
+            position:fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Menu button (for mobile) */
+        .menu-btn {
+            font-size: 26px;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: none;
+            /* hidden on large screen */
+        }
+
+        /* Nav links for desktop */
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #66a6ff;
+        }
+
+        /* Content area */
+        .content {
+            padding: 100px 20px;
+            color: #222;
+        }
+
+        /* ---------- Responsive Design ---------- */
+        @media (max-width: 768px) {
+
+            /* Show menu button */
+            .menu-btn {
+                display: block;             
+            }
+
+            /* Hide normal horizontal links */
+            .nav-links {
+                position:fixed;
+                top:50px;
+                right: -220px;
+                width: 200px;
+                height: 100%;
+                flex-direction:column;
+                 background: #333;
+                padding-top: 60px;
+                transition: 0.3s;
+            }
+
+            .nav-links a {
+                padding: 12px 20px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            /* When active (sidebar visible) */
+             .nav-links.active {
+                right: 0;
+                top:50px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <div class="logo">MySite</div>
+        <button id="menuBtn" class="menu-btn">☰</button>
+        <nav class="nav-links" id="navLinks">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main class="content">
+        <h1>Welcome 👋</h1>
+        <p>This navbar becomes a sidebar on small screens.</p>
+    </main>
+
+    <script>
+        const menuBtn = document.getElementById("menuBtn");
+        const navLinks = document.getElementById("navLinks");
+
+        menuBtn.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+      
+        });
+
+    </script>
+</body>
+
+</html>

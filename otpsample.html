@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>
+        OTP system
+    </title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        html,body{
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            height:100%;
+            background: linear-gradient(135deg,blue,navy);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            flex-direction: column;
+            color:white;
+            gap:1rem;
+        }
+        button{
+            width:200px;
+            height:40px;
+            border:none;
+            outline:none;
+            border-radius: 25px;
+            background: white;
+            color:black;
+            padding:10px 20px ;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        input{
+            width:300px;
+            height:40px;
+            border:none;
+            outline:none;
+            border-radius: 25px;
+            padding:10px 20px ;
+            text-align:center;
+        }
+    </style>
+    </head>
+<body>
+  <h1>OTP Verification</h1>
+
+  <button onclick="generateOTP()">Generate OTP</button>
+  <p id="showOtp"></p>
+
+  <input type="text" id="userOtp" placeholder="Enter OTP">
+  <button onclick="verifyOTP()">Verify OTP</button>
+
+  <p id="result"></p>
+
+  <script>
+    let otp;
+
+    function generateOTP() {
+      otp = Math.floor(100000 + Math.random() * 900000);
+      document.getElementById("showOtp").innerText = "Your OTP is: " + otp; 
+    }
+
+    function verifyOTP() {
+      const userInput = document.getElementById("userOtp").value;
+      const result = document.getElementById("result");
+        if(!userInput)
+    {
+        alert("Enter OTP..")
+    }
+     else if (userInput == otp) {
+        result.innerText = "✅ OTP Verified Successfully";
+      } else {
+        result.innerText = "❌ Invalid OTP";
+      }
+    }
+  </script>
+</body>
+</html>

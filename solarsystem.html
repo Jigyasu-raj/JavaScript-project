@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CSS 3D Solar System</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#020617;
+    perspective:1000px;
+    overflow:hidden;
+}
+
+.solar-system{
+    position:relative;
+    width:500px;
+    height:500px;
+    transform-style:preserve-3d;
+    transform: rotateX(60deg);
+}
+
+/* ☀ Sun */
+.sun{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:90px;
+    height:90px;
+    background:radial-gradient(circle,#ffd700,#ff4500);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    box-shadow:0 0 60px orange;
+    animation :sunSpin 6s linear infinite;
+}
+
+/* ORBIT CENTER */
+.orbit{
+    position:absolute;
+    top:50%;
+    left:50%;
+    border:1px solid rgba(255,255,255,0.3);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+}
+
+/* ROTATION LAYER */
+.orbit-rotate{
+    width:100%;
+    height:100%;
+    animation: spin linear infinite;
+}
+
+/* PLANET */
+.planet{
+    position:absolute;
+    top:-8px;
+    left:50%;
+    transform:translateX(-50%) translateZ(20px);
+    border-radius:50%;
+}
+
+/* Mercury */
+.mercury-orbit{
+    width:140px;
+    height:140px;
+}
+.mercury-orbit .orbit-rotate{
+    animation-duration:4s;
+}
+.mercury{
+    width:10px;
+    height:10px;
+    background:gray;
+}
+
+/* Earth */
+.earth-orbit{
+    width:220px;
+    height:220px;
+}
+.earth-orbit .orbit-rotate{
+    animation-duration:8s;
+}
+.earth{
+    width:16px;
+    height:16px;
+    background:#3b82f6;
+}
+
+/* Mars */
+.mars-orbit{
+    width:300px;
+    height:300px;
+}
+.mars-orbit .orbit-rotate{
+    animation-duration:12s;
+}
+.mars{
+    width:14px;
+    height:14px;
+    background:#ef4444;
+}
+@keyframes sunSpin{
+    from{
+        transform:translate(-50%,-50%)  rotateZ(0deg);
+    }
+    to{
+        transform:translate(-50%,-50%)  rotateZ(360deg);
+    }
+}
+
+@keyframes spin{
+    from{ transform:rotateZ(0deg); }
+    to{ transform:rotateZ(360deg); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="solar-system">
+
+    <div class="sun"></div>
+
+    <div class="orbit mercury-orbit">
+        <div class="orbit-rotate">
+            <div class="planet mercury"></div>
+        </div>
+    </div>
+
+    <div class="orbit earth-orbit">
+        <div class="orbit-rotate">
+            <div class="planet earth"></div>
+        </div>
+    </div>
+
+    <div class="orbit mars-orbit">
+        <div class="orbit-rotate">
+            <div class="planet mars"></div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Slider</title>
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .slider {
+      position: relative;
+      width: 99%;
+      height: 400px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .slider img {
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.6s ease-in-out;
+    }
+
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    #prev {
+      left: 10px;
+    }
+
+    #next {
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="slider">
+    <img id="slide" src="https://picsum.photos/id/1011/800/400" alt="Slider Image">
+    <button id="prev">⬅ Prev</button>
+    <button id="next">Next ➡</button>
+  </div>
+
+  <script>
+    const images = [
+      "https://picsum.photos/id/1011/800/400",
+      "https://picsum.photos/id/1015/800/400",
+      "https://picsum.photos/id/1016/800/400",
+      "https://picsum.photos/id/1020/800/400",
+      "https://picsum.photos/id/1024/800/400"
+    ];
+
+    let index = 0;
+    const slide = document.querySelector("#slide");
+    const next = document.querySelector("#next");
+    const prev = document.querySelector("#prev");
+
+    function showImage() {
+      slide.src = images[index];
+    }
+
+    next.addEventListener("click", () => {
+      index = (index + 1) % images.length;
+      showImage();
+    });
+
+    prev.addEventListener("click", () => {
+      index = (index - 1 + images.length) % images.length;
+      showImage();
+    });
+
+    // Auto slide every 3 seconds
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      showImage();
+    }, 3000);
+  </script>
+</body>
+</html>

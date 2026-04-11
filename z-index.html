@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>z-index</title>
+    <style>
+        *{
+            margin:0;padding:0;box-sizing: border-box;
+        }
+       body,html { height:100%;
+       
+        }
+        body{
+            background: black;
+             display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+        div{
+            width:200px;
+            height:200px;
+            display: flex;
+            padding:10px;
+            justify-content: center;
+            align-items: center;
+            background: white;
+            color:black;
+            position: relative;
+        }
+        div::before{
+            content:'';
+            position: absolute;
+            background: red;
+             inset:-3px;
+             z-index: -1;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div></div>
+       Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate quidem omnis iure illum ab aperiam, incidunt voluptas voluptatem maiores dicta accusantium, delectus libero corrupti perspiciatis pariatur suscipit ea, earum accusamus?
+    </div>
+</body>
+</html>

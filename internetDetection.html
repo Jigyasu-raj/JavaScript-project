@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <h1 id="status"></h1>  
+    
+
+ <script>
+    function updateStatus() {
+  const status = document.getElementById("status");
+  status.textContent = navigator.onLine 
+    ? "🟢 Online" 
+    : "🔴 Offline";
+}
+
+window.addEventListener("load", updateStatus);
+window.addEventListener("online", updateStatus);
+window.addEventListener("offline", updateStatus);
+const connection = navigator.connection;
+
+console.log(connection.effectiveType); // 4g, 3g, 2g
+console.log(connection.downlink);      // Mbps
+
+ </script>   
+</body>
+</html>

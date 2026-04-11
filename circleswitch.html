@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Toggle Button</title>
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      font-family: Arial;
+    }
+    .switch{
+        position:relative;
+        display:flex;
+        width:80px;
+        height:40px;
+        border-radius:25px;
+      }
+    .switch input{
+        opacity: 0;
+        width:0;
+        height:0;
+      }
+    .switch .slider{
+        position: absolute;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        background-color: green;
+        border-radius: inherit;
+      }
+    .switch .slider::before{
+        content:"";
+        position: absolute;
+        top:5px;
+        left:5px;
+        width:30px;
+        height:30px;
+        border-radius: 50%;
+        background: white;
+        cursor: pointer;
+        transition: translateX 1s;
+      }.switch input:checked +.slider{
+        background: red ;
+      }
+      input:checked +.slider::before{
+        transform: translateX(40px);
+      }
+  </style>
+</head>
+
+<body>
+
+  <label class="switch">
+    <input type="checkbox">
+    <span class="slider"></span>
+  </label>
+
+</body>
+</html>

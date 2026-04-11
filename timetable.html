@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly Time Table</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.2);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    transition: 0.3s;
+}
+
+th {
+    background-color: #6c5ce7;
+    color: white;
+}
+
+td.class:hover {
+    background-color: #ffeaa7;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weekly Time Table</h1>
+        <table id="timetable">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>9:00 - 10:00</td>
+                    <td class="class">Math</td>
+                    <td class="class">Physics</td>
+                    <td class="class">Chemistry</td>
+                    <td class="class">English</td>
+                    <td class="class">Computer</td>
+                </tr>
+                <tr>
+                    <td>10:00 - 11:00</td>
+                    <td class="class">English</td>
+                    <td class="class">Math</td>
+                    <td class="class">Biology</td>
+                    <td class="class">Physics</td>
+                    <td class="class">Chemistry</td>
+                </tr>
+                <tr>
+                    <td>11:00 - 12:00</td>
+                    <td class="class">Computer</td>
+                    <td class="class">Chemistry</td>
+                    <td class="class">Math</td>
+                    <td class="class">Biology</td>
+                    <td class="class">English</td>
+                </tr>
+                <tr>
+                    <td>12:00 - 1:00</td>
+                    <td class="class">Lunch</td>
+                    <td class="class">Lunch</td>
+                    <td class="class">Lunch</td>
+                    <td class="class">Lunch</td>
+                    <td class="class">Lunch</td>
+                </tr>
+                <tr>
+                    <td>1:00 - 2:00</td>
+                    <td class="class">Physics</td>
+                    <td class="class">English</td>
+                    <td class="class">Computer</td>
+                    <td class="class">Math</td>
+                    <td class="class">Biology</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Highlight current period dynamically
+const cells = document.querySelectorAll("td.class");
+
+cells.forEach(cell => {
+    cell.addEventListener("click", () => {
+        cells.forEach(c => c.style.backgroundColor = ""); // reset all
+        cell.style.backgroundColor = "#00cec9"; // highlight clicked
+        alert(`You selected ${cell.textContent}`);
+    });
+});
+
+    </script>
+</body>
+</html>

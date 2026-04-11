@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Note App</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: skyblue;
+            min-height: 100vh;
+        }
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 60%;
+            padding: 20px;
+            background: darkblue;
+            color: white;
+            border-radius: 10px;
+        }
+
+        #container input {
+            width: 75%;
+            padding: 8px 20px;
+            text-align: center;
+            outline: none;
+            border: none;
+            font-size: 20px;
+            border-radius: inherit;
+        }
+
+        #container textarea {
+            width: 75%;
+            height: 150px;
+            padding: 8px 20px;
+            outline: none;
+            border: none;
+            font-size: 20px;
+            border-radius: inherit;
+        }
+
+        #container #btngroup {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        #container button {
+            padding: 8px 20px;
+            outline: none;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+
+        #container #notes {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            gap: 10px;
+        }
+
+        #container #notes div {
+            width: 80%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            padding: 10px 20px;
+            gap: 5px;
+            box-shadow: 0px 0px 2px gray;
+        }
+
+        #container #notes div p {
+            white-space: pre-wrap;
+            /* preserve line breaks */
+            word-wrap: break-word;
+            /* wrap long words */
+            overflow-wrap: break-word;
+            /* safety for long words */
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1>Note App</h1>
+        <br>
+        <span id="Message"></span>
+        <input id="title" type="text" placeholder="Enter title">
+        <br>
+        <textarea name="" id="desc" placeholder="Enter description...."></textarea>
+        <br>
+        <div id="btngroup">
+            <button id="saveBtn">Save</button>
+            <button onclick="deleteAll()">Delete All</button>
+        </div>
+        <br><br>
+        <div id="notes">
+            <!-- content here  -->
+        </div>
+    </div>
+</body>
+<script>
+    let notes = JSON.parse(localStorage.getItem("notes")) || [];
+    let editIndex = null; // track which note is being edited
+    const message = document.getElementById("Message")
+    const titleInput = document.getElementById("title");
+    const descInput = document.getElementById("desc");
+    const saveBtn = document.getElementById("saveBtn");
+    const notesDiv = document.getElementById("notes");
+    if (!message || !titleInput || !descInput || !saveBtn || !notesDiv) {
+        console.error("Some DOM elements are missing");
+    }
+    else {
+        // Save or Update note
+        saveBtn.addEventListener("click", () => {
+            const title = titleInput.value.trim();
+            const desc = descInput.value.trim();
+            if (!title || !desc) {
+                message.innerHTML = "Please enter both title and note!";
+                message.style.color = "red";
+                clearMessage();
+                return;
+            }
+            if (editIndex === null) {
+                // Add new note
+                notes.push({ title, desc });
+            } else {
+                // Update existing note
+                notes[editIndex] = { title, desc };
+                editIndex = null;
+                saveBtn.textContent = "Save Note"; // reset button text
+            }
+            localStorage.setItem("notes", JSON.stringify(notes));
+            titleInput.value = "";
+            descInput.value = "";
+            showNotes();
+        });
+
+        // Display notes
+        function showNotes() {
+            notesDiv.innerHTML = ""; // clear old content
+            notes.forEach((note, i) => {
+                notesDiv.innerHTML += `<div>
+      <h3>${note.title}:-</h3>
+      <p>${note.desc}</p>
+      <button onclick="editNote(${i})">Edit</button>
+      <button onclick="deleteNote(${i})">Delete</button>
+    </div>`;
+            });
+        }
+
+        // Edit note
+        function editNote(i) {
+            titleInput.value = notes[i].title;
+            descInput.value = notes[i].desc;
+            editIndex = i;
+            saveBtn.textContent = "Update Note"; // indicate edit mode
+        }
+
+        // Delete note
+        function deleteNote(i) {
+            if (confirm("Are you sure you want to delete this note?")) {
+                notes.splice(i, 1);
+                localStorage.setItem("notes", JSON.stringify(notes));
+                showNotes();
+            }
+        }
+
+        // Initial render
+        showNotes();
+        function deleteAll() {
+            if (!localStorage.getItem("notes")) {
+                alert("Nothing to be delete")
+            }
+            else {
+                confirm("Are you want to delete all?")
+                localStorage.removeItem("notes");
+                notes = [];// storage clear                   // array clear
+                showNotes();                      // UI update
+            }
+        }
+        function clearMessage() {
+            setTimeout(function () {
+                message.innerHTML = "";
+            }, 2000)
+        }
+    }
+</script>
+
+</html>

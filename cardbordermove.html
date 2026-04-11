@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html,body{
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      height:100%;
+    }
+@property --angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.card {
+  width: 250px;
+  height: 150px;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  position: relative;
+  border-radius: 20px;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  border-radius: inherit;
+  background: conic-gradient(from var(--angle), #ff0080, #ff8c00, #40e0d0, #ff0080);
+  animation: borderMove 4s linear infinite;
+}
+@keyframes borderMove {
+ 0%{
+  --angle:0deg;
+ }
+ 100%{
+  --angle:360deg;
+ }
+}
+
+
+  </style>
+</head>
+<body>
+<div class="card">
+  Animated Border
+</div>
+
+
+</body>
+</html>

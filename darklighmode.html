@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark and Light Mode</title>
+    <style>
+        *{margin:0;padding:0;box-sizing: border-box;font-family: Arial, Helvetica, sans-serif;}
+        body.active{
+            background: black;
+            color:white;
+        }
+        span{
+            position: absolute;
+            top:20px; 
+            right:20px;
+            font-size:1.5rem;
+            border:none;
+            outline:none;
+            cursor: pointer;
+            color:gray;
+        }
+        h1
+        {
+            margin:100px;
+        }
+    </style>
+</head>
+<body>
+   <span>Day Mode🌚</span>
+   <h1 id="heading"></h1>
+</body>
+<script>
+    const Btn = document.querySelector("span")
+    const Body = document.querySelector("body")
+    const heading = document.querySelector("#heading")
+    Btn.addEventListener("click",function(e){
+        e.stopPropagation()
+        if(!Body.classList.contains("active"))
+    {
+        Body.classList.add("active")
+        Btn.innerHTML = "Night Mode☀️"
+        Btn.style.cssText = "color:yellow;" 
+        heading.textContent = "Good Night 🌙"   
+    }
+    else{
+         Body.classList.remove("active")
+        Btn.innerHTML = " Day Mode🌚"
+        Btn.style.cssText = "color:black;"
+        heading.textContent = "Good Morning ☀️"
+
+    }
+      
+        
+        
+        
+        
+    })
+</script>
+</html>

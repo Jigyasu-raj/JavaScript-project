@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Round Progress</title>
+<style>
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    font-family: Arial, sans-serif;
+  }
+
+  .circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: conic-gradient(#ff7a7a 0deg, #ff7a7a 0deg, #e6e6e6 0deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-weight: bold;
+    font-size: 24px;
+    transition: background 0.3s;
+  }
+  .circle::before{
+    content:"";
+    position:absolute;
+    width: 130px;
+    height: 130px;
+    background-color:white;
+    border-radius: 50%;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    background-color: #ff7a7a;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  span{
+    z-index: 1;
+    color:#333;
+  }
+
+  .container {
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="circle" id="progress">
+        <span id = "presentage">0%</span>
+    </div>
+    <button onclick="fillProgress()">Start</button>
+  </div>
+
+<script>
+  function fillProgress() {
+    let progress = 0;
+    const circle = document.getElementById("progress");
+    const presentage = document.querySelector("#presentage")
+
+    const interval = setInterval(() => {
+      if (progress > 100) {
+        clearInterval(interval);
+      } else {
+        circle.style.background = `conic-gradient(#ff7a7a ${progress * 3.6}deg, #e6e6e6 ${progress * 3.6}deg)`;
+        presentage.textContent = progress + "%";
+        progress++;
+      }
+    },100);
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Music Player</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .player {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px 50px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    button {
+      background: #ff4b2b;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff6a00;
+    }
+  </style>
+</head>
+<body>
+  <div class="player">
+    <h2>🎵 Simple Music Player</h2>
+    <p>Click to play or pause</p>
+    <button id="playBtn">▶ Play</button>
+    <audio id="music" src="https://cdn.pixabay.com/audio/2022/11/29/audio_86b8fefc2b.mp3" type="audio/mpeg"></audio>
+  </div>
+
+  <script>
+    const playBtn = document.querySelector("#playBtn");
+    const music = document.querySelector("#music");
+    let isPlaying = false;
+
+    playBtn.addEventListener("click", async() => {
+         try {
+        if (!isPlaying) {
+          await music.play(); // ✅ Use await for promise-based play
+          playBtn.textContent = "⏸ Pause";
+          isPlaying = true;
+        } else {
+          music.pause();
+          playBtn.textContent = "▶ Play";
+          isPlaying = false;
+        }
+      } catch (err) {
+        console.error("Playback error:", err);
+      }
+    });
+
+    // ✅ Handle when the song ends automatically
+    music.addEventListener("ended", () => {
+      playBtn.textContent = "▶ Play";
+      isPlaying = false;
+    });
+
+  </script>
+</body>
+</html>

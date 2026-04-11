@@ -83,6 +83,13 @@
             placeholder.style.top = "0.5rem"
         })
     </script> -->
+    <script>
+        const Label =document.querySelector("label")
+        let inputBox = document.querySelector("#inputBox")
+        inputBox.addEventListener("input",()=>{
+            Label.remove()
+        })
+    </script>
 </body>
 
 </html>

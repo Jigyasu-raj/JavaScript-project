@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local Storage</title>
+</head>
+<body>
+    <input type="text" id="taskInput" placeholder="Enter task">
+<button id="addBtn">Add</button>
+<ul id="taskList"></ul>
+
+<script>
+const input = document.getElementById("taskInput");
+const btn = document.getElementById("addBtn");
+const list = document.getElementById("taskList");
+
+let todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+function showTodos() {
+  list.innerHTML = "";
+  todos.forEach((task, index) => {
+    let li = document.createElement("li");
+    li.textContent = task;
+    li.onclick = () => removeTask(index);
+    list.appendChild(li);
+  });
+}
+
+btn.addEventListener("click", () => {
+  if (input.value.trim()) {
+    todos.push(input.value.trim());
+    localStorage.setItem("todos", JSON.stringify(todos));
+    input.value = "";
+    showTodos();
+  }
+});
+
+function removeTask(i) {
+  todos.splice(i, 1);
+  localStorage.setItem("todos", JSON.stringify(todos));
+  showTodos();
+}
+
+showTodos();
+</script>
+
+</body>
+</html>

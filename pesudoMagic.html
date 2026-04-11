@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>::before & ::after Magic</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Body Styling */
+        body {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* ✨ Example 1: Before & After with Text */
+        .title::before {
+            content: "🌟 ";
+        }
+
+        .title::after {
+            content: " 🚀";
+        }
+
+        /* ✨ Example 2: Animated Underline */
+        .heading {
+            position: relative;
+            display: inline-block;
+            margin: 20px 0;
+            color: #007BFF;
+        }
+
+        .heading::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 3px;
+            left: 0;
+            bottom: -5px;
+            background: #007BFF;
+            transition: 0.3s;
+        }
+
+        .heading:hover::after {
+            width: 100%;
+        }
+
+        /* ✨ Example 3: Button Shine Effect */
+        .btn {
+            position: relative;
+            background: #007BFF;
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            overflow: hidden;
+            margin-top: 15px;
+        }
+
+        .btn::before {
+            content: "Click me";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            display:flex;
+            justify-content:center;
+            align-items: center;
+            left:0;
+            backdrop-filter: blur(10px);
+            transform:scaleX(0);
+            transform-origin:left;
+            background:red;
+            transition:transform 1s;
+        }
+
+        .btn:hover::before{
+            transform: scaleX(1);
+        }
+
+        /* ✨ Example 4: Notification Badge */
+        .box {
+            position: relative;
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #f1f1f1;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .box::after {
+            content: "New";
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: red;
+            color: white;
+            font-size: 12px;
+            padding: 3px 7px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="title">Welcome</h1>
+
+        <h2 class="heading">Hover Me</h2>
+
+        <br>
+        <button class="btn">Hover Button</button>
+
+        <br><br>
+        <div class="box">Inbox</div>
+    </div>
+
+</body>
+</html>

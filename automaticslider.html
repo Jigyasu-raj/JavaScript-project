@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Slider</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+            box-sizing:border-box;
+        }
+        body,html{
+            height:100vh;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            width:400px;
+            height:200px;
+            border:1px solid black;
+            overflow-x:hidden;
+            white-space:nowrap;
+            scroll-behavior: smooth;
+        }
+        .box{
+            width:100%;
+            height:100%;
+            display: inline-block;
+            background-color: red;
+        }
+        .box:nth-child(even){
+            background-color: green;
+        }
+        .indicator{
+            text-align:start;
+            margin-top:5px;
+        }
+        .dot{
+            width:10px;
+            height:10px;
+            border: 1px solid black;
+            border-radius: 50%;
+            display: inline-block;
+            background: gray;
+        }
+        .active{
+            background: green;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+         <div class="box">1</div>
+         <div class="box">2</div>
+         <div class="box">3</div>
+         <div class="box">4</div>
+    </div>
+    <div class="indicator">
+       <span class="dot"></span>
+       <span class="dot"></span>
+       <span class="dot"></span>
+       <span class="dot"></span>
+    </div>
+    <script>
+ const container = document.querySelector(".container");
+const dots = document.querySelectorAll(".dot");
+const boxWidth = container.clientWidth;
+
+let index = 0;
+
+function updateIndicator() {
+    dots.forEach(dot => dot.classList.remove("active"));
+    dots[index].classList.add("active");
+}
+
+function autoScroll() {
+    index++;
+
+    if (index >= dots.length) {
+        index = 0;
+    }
+
+    container.scrollLeft = index * boxWidth;
+    updateIndicator();
+}
+
+updateIndicator(); // first dot active
+setInterval(autoScroll, 2000);
+
+    </script>
+</body>
+</html>

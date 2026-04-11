@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multiple Progress Bars</title>
+<style>
+  body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #c9ffbf, #ffafbd);
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    width: 300px;
+  }
+
+  .progress-box {
+    margin-bottom: 20px;
+  }
+
+  .label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .progress-bar {
+    position: relative;
+    width: 100%;
+    height: 25px;
+    background: #e6e6e6;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff7a7a, #ffd36b);
+    border-radius: 15px 0 0 15px;
+    transition: width 0.3s;
+    position:relative
+  }
+
+  .percent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #333;
+  }
+
+  button {
+    padding: 8px 15px;
+    background-color: #ff7a7a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- Progress bar 1 -->
+    <div class="progress-box">
+      <div class="label">HTML</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="bar1"></div>
+        <div class="percent" id="text1">0%</div>
+      </div>
+    </div>
+
+    <!-- Progress bar 2 -->
+    <div class="progress-box">
+      <div class="label">CSS</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="bar2"></div>
+        <div class="percent" id="text2">0%</div>
+      </div>
+    </div>
+
+    <!-- Progress bar 3 -->
+    <div class="progress-box">
+      <div class="label">JavaScript</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="bar3"></div>
+        <div class="percent" id="text3">0%</div>
+      </div>
+    </div>
+
+    <button onclick="startAll()">Start All</button>
+  </div>
+
+<script>
+function animateBar(fillId, textId, speed) {
+  let width = 0;
+  const fill = document.getElementById(fillId);
+  const text = document.getElementById(textId);
+
+  const interval = setInterval(() => {
+    if (width >= 100) clearInterval(interval);
+    else {
+      width++;
+      fill.style.width = width + "%";
+      text.textContent = width + "%";
+    }
+  }, speed);
+}
+
+function startAll() {
+  animateBar("bar1", "text1", 25);
+  animateBar("bar2", "text2", 35);
+  animateBar("bar3", "text3", 45);
+}
+</script>
+</body>
+</html>

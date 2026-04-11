@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple To Do List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            padding: 2rem;
+        }
+
+        input {
+            width: 300px;
+            height: 40px;
+            padding: 20px;
+            font-size: 1rem;
+        }
+
+        button {
+            width: 150px;
+            height: 40px;
+            outline: none;
+            font-size: 1rem;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .newitems {
+            padding: 10px 20px;
+            margin: 10px;
+            display: flex;
+            justify-content: space-between;
+           align-items: center;
+            box-shadow: 0px 0px 2px gray;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1> 📝Simple To Do List</h1>
+    <br>
+    <!-- ********************inputbox***************** -->
+    <input type="text" placeholder="Write something here......" id="inputBox">
+    <!-- **************addbtn************** -->
+    <button id="AddBtn">Add Task</button>
+    <!-- ************item-list********** -->
+    <div class="items-list">
+        <!-- new items here -->
+    </div>
+    <script>
+        let products = []
+        const inputBox = document.querySelector("#inputBox")
+        const addBtn = document.querySelector("#AddBtn")
+        const newItems = document.querySelector(".items-list")
+        //   ************function to add new taks*****************
+        function addItems() {
+            const items = inputBox.value.trim();
+            if (!items) {
+                alert("Enter something..")
+            }
+            else {
+                products.push(items)
+                inputBox.value = ""
+                DispalyItems()
+            }
+        }
+        //   *****************function to display all takes*****************
+
+        function DispalyItems() {
+            newItems.innerHTML = ""
+            products.forEach((values, index) => {
+                const div = document.createElement("div")
+                div.classList.add("newitems")
+                div.textContent = values
+                newItems.appendChild(div)
+
+                const DelBtn = document.createElement("button")
+                DelBtn.innerHTML = "Delete"
+                div.appendChild(DelBtn)
+                DelBtn.style.backgroundColor = "red"
+                DelBtn.addEventListener("click", function() {
+                    DeleteItems(index)
+                })
+
+            })
+        }
+        // function to delete items
+        function DeleteItems(index) {
+            products.splice(index, 1);
+            DispalyItems()
+        }
+    
+        addBtn.addEventListener("click", addItems)
+            // add items on press Enter
+        inputBox.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                addItems()
+            }
+        })
+    </script>
+</body>
+
+</html>

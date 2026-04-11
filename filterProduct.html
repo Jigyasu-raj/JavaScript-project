@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>filter</title>
+</head>
+<body>
+    <div>
+  <input type="text" id="search" placeholder="Search products..." />
+</div>
+
+<ul id="productList"></ul>
+<script>
+    // 1️⃣ Product array
+const products = [
+  { name: "Apple iPhone", price: 70000, img: "https://via.placeholder.com/50" },
+  { name: "Samsung Galaxy", price: 50000, img: "https://via.placeholder.com/50" },
+  { name: "Realme 10", price: 15000, img: "https://via.placeholder.com/50" },
+  { name: "Redmi Note", price: 12000, img: "https://via.placeholder.com/50" },
+  { name: "OnePlus Nord", price: 35000, img: "https://via.placeholder.com/50" }
+];
+
+// 2️⃣ DOM element
+const searchInput = document.querySelector("#search");
+const productList = document.querySelector("#productList");
+
+// 3️⃣ Function to render products
+function renderProducts(list) {
+  productList.innerHTML = ""; // Clear previous items
+
+  list.forEach(product => {
+    const li = document.createElement("li");
+
+    li.innerHTML = `
+      <img src="${product.img}" alt="${product.name}" />
+      <span>${product.name}</span> - <strong>₹${product.price}</strong>
+    `;
+
+    productList.appendChild(li);
+  });
+}
+
+// 4️⃣ Initial render
+renderProducts(products);
+
+// 5️⃣ Search functionality
+searchInput.addEventListener("input", () => {
+  const searchTerm = searchInput.value.toLowerCase();
+
+  // Filter products array
+  const filtered = products.filter(p => p.name.toLowerCase().includes(searchTerm));
+
+  // Render filtered list
+  renderProducts(filtered);
+});
+
+</script>
+</body>
+</html>
